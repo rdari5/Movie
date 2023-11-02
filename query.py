@@ -21,11 +21,11 @@ while option != 'q':
     option = input("").lower()
 
     if option == "sn":
-        word = scan("enter a word to search: ")
+        word = input("enter a word to search: ")
         movie_names(word)
 
     elif option == "sc":
-        word = scan("enter a word to search: ")
+        word = input("enter a word to search: ")
         author_names(word)
     
     elif option == "list":

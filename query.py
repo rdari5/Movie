@@ -5,9 +5,15 @@ movies = Movies('./movies.txt')
 
 def movie_names(name):
 
+
+    for i in range(len(movies._movies)):
+        if movies._movies[i]['name'].lower().__contains__(str(name).lower()):
+            print(movies._movies[i]['name'])
+        
+
 def list_movies():
     for i in range(len(movies._movies)):
-        print(movies._movies[i]['name'])
+
     print()
 
 
@@ -28,6 +34,7 @@ def author_names(name):
                     print(movies._movies[i]['cast'][k], end = ' ')
             
             print("]")
+
 
 option = ' '
 

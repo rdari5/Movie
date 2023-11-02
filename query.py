@@ -1,60 +1,44 @@
-from movies import Movies
+from movies import Movies  # Assuming movies.py contains the Movies class
 
-movies = Movies('./movies.txt')
+def movie_names(movies, name):
+    for movie in movies._movies:
+        if name.lower() in movie['name'].lower():
+            print(movie['name'])
 
+def list_movies(movies):
+    for movie in movies._movies:
+        print(movie['name'])
 
-def movie_names(name):
-
-
-    for i in range(len(movies._movies)):
-        if movies._movies[i]['name'].lower().__contains__(str(name).lower()):
-            print(movies._movies[i]['name'])
-        
-
-def list_movies():
-    for i in range(len(movies._movies)):
-
-    print()
-
-
-def author_names(name):
-    name = str(name).lower()
-    for i in range(len(movies._movies)):
-        castFound = False
-        for j in range(len(movies._movies[i]['cast'])):
-            if movies._movies[i]['cast'][j].lower().__contains__(name):
-                castFound = True
-                
-        
-        if castFound:
-            print(movies._movies[i]['name'])
-            print("[", end = ' ')
-            for k in range(0,len(movies._movies[i]['cast'])):
-                if movies._movies[i]['cast'][k].lower().__contains__(name):
-                    print(movies._movies[i]['cast'][k], end = ' ')
-            
+def author_names(movies, name):
+    name = name.lower()
+    for movie in movies._movies:
+        if any(name in cast.lower() for cast in movie['cast']):
+            print(movie['name'])
+            print("[", end=' ')
+            print(*[cast for cast in movie['cast'] if name in cast.lower()], end=' ')
             print("]")
 
+def main():
+    movies_instance = Movies('./movies.txt')  # Initialize the Movies class
 
-option = ' '
+    option = ' '
 
+    while option != 'q':
+        print("q: quit")
+        print("sn: search movie names")
+        print("sc: search casts")
+        print("list: print all the movie names")
+        option = input("Enter an option: ").lower()
 
-while option != 'q':
-    print("q: quit") 
-    print("sn: search movie names")
-    print("sc: search casts")
-    print("list: print all the movie names")
-    option = input("").lower()
+        if option == "sn":
+            word = input("Enter a word to search movie names: ")
+            movie_names(movies_instance, word)
+        elif option == "sc":
+            word = input("Enter a word to search casts: ")
+            author_names(movies_instance, word)
+        elif option == "list":
+            list_movies(movies_instance)
 
-    if option == "sn":
-        word = input("enter a word to search: ")
-        movie_names(word)
-
-    elif option == "sc":
-        word = input("enter a word to search: ")
-        author_names(word)
-    
-    elif option == "list":
-       list_movies()
-
+if __name__ == "__main__":
+    main()
 

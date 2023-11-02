@@ -6,6 +6,9 @@ movies = Movies('./movies.txt')
 def movie_names(name):
 
 def list_movies():
+    for i in range(len(movies._movies)):
+        print(movies._movies[i]['name'])
+    print()
 
 
 def author_names(name):
